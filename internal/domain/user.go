@@ -72,13 +72,6 @@ type Principal struct {
 	SessionID   string `json:"-"`
 }
 
-var principalContextValue Principal
-
-func (p Principal) ContextValue() *Principal {
-	principalContextValue = p
-	return &principalContextValue
-}
-
 func (s Session) IsActive(now time.Time) bool {
 	return s.RevokedAt == nil && s.ExpiresAt.After(now)
 }

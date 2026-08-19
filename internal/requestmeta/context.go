@@ -23,11 +23,7 @@ func RequestID(ctx context.Context) string {
 }
 
 func WithPrincipal(ctx context.Context, principal domain.Principal) context.Context {
-	value := principal.ContextValue()
-	if current, ok := Principal(ctx); ok && current == principal {
-		return ctx
-	}
-	return context.WithValue(ctx, principalKey, *value)
+	return context.WithValue(ctx, principalKey, principal)
 }
 
 func Principal(ctx context.Context) (domain.Principal, bool) {
